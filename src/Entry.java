@@ -4,7 +4,7 @@ public class Entry {
 	private String lastName;
 	private String phoneNumber;
 	private String email;
-	
+
 	//Constructors:
 	public Entry (String firstName, String lastName, String phoneNumber, String email) {
 		this.firstName = firstName;
@@ -12,6 +12,7 @@ public class Entry {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 	}
+	
 	
 	//get methods:
 	
@@ -47,11 +48,14 @@ public class Entry {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "First Name: " + firstName + "Last Name: " + lastName + "Phone Number: " + phoneNumber + "Email: " + email;
+		return "First Name: " + firstName + ", Last Name: " + lastName + ", Phone Number: " + phoneNumber + ", Email: "
+				+ email;
 	}
+	
+	
 	
 	
 }
