@@ -51,7 +51,7 @@ public class Entry {
 
 	@Override
 	public String toString() {
-		return "First Name: " + firstName + ", Last Name: " + lastName + ", Phone Number: " + phoneNumber + ", Email: "
+		return "\nFirst Name: " + firstName + "\nLast Name: " + lastName + "\nPhone Number: " + phoneNumber + "\nEmail: "
 				+ email;
 	}
 	

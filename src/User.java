@@ -4,11 +4,12 @@ public class User {
 
 	public static void main(String[] args) {
 		Scanner userInput = new Scanner(System.in);
+		AddressBook addressBook = new AddressBook();
 		
 		boolean quit = false;
 		
 		while (!quit) {
-			System.out.println("Please choose what you'd like to do");
+			System.out.println("Please choose what you'd like to do with the database:");
 			System.out.println("1. Add an entry");
 			System.out.println("2. Remove an entry");
 			System.out.println("3. Search for a specific entry");
@@ -22,19 +23,8 @@ public class User {
 			switch (options) {
 			case 1:
 				// add the entry
-				System.out.println("First Name: ");
-				String firstName = userInput.nextLine();
-
-				System.out.println("Last Name: ");
-				String lastName = userInput.nextLine();
-
-				System.out.println("Phone Number: ");
-				String phoneNumber = userInput.nextLine();
-
-				System.out.println("E-mail: ");
-				String email = userInput.nextLine();
-
-				AddressBook.addEntries(new Entry(firstName, lastName, phoneNumber, email));
+				
+				addressBook.addEntries();
 				break;
 
 			case 2:
@@ -46,7 +36,7 @@ public class User {
 				break;
 
 			case 3:
-				// Search
+				// Search	
 				AddressBook.searchEntry();
 				break;
 			case 4:
