@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AddressBook {
@@ -25,7 +26,7 @@ public class AddressBook {
 		String email = userInput.nextLine();
 
 		if (searchEmail(email)) {
-			System.out.println("Email exists");
+			System.out.println("Email already being used for another contact!");
 		} else {
 			addressBook.add(new Entry(firstName, lastName, phoneNumber, email));
 			System.out.println("Added new entry!");
@@ -49,17 +50,17 @@ public class AddressBook {
 			if (email.equals(addressBook.get(i).getEmail())) {
 				Entry entry = addressBook.get(i);
 				addressBook.remove(entry);
-				
+
 				System.out.println("Deleted the following entry: ");
 				System.out.println("\n************");
 				System.out.println(entry.toString());
 				System.out.println("************");
-						
+
 				emailExists = true;
-			} 
-		} 
-		if(!emailExists){
-			System.out.println("That email does not exist!");
+			}
+		}
+		if (!emailExists) {
+			System.out.println("Entry not found!");
 		}
 	}
 
@@ -69,77 +70,76 @@ public class AddressBook {
 	// as a substring (e.g. if a first name search is conducted with 'a,' all
 	// entries that have a first name starting with 'a' will be returned).
 
-
 	public static void searchEntry() {
 		System.out.println("Choose a search type:");
 		System.out.println("1. First Name\n" + "2. Last Name\n" + "3. Phone Number\n" + "4. Email\n");
-		int options = userInput.nextInt();
-		System.out.println("Enter your search");
-		userInput.nextLine();
-		String choice = userInput.nextLine();
-		boolean search = false;
-		while (!search) {
-			for (Entry entry : addressBook) {
-				switch (options) {
-				case 1:
+		try {
+			int options = userInput.nextInt();
+			System.out.println("Enter your search");
+			userInput.nextLine();
+			String choice = userInput.nextLine();
+			boolean notFound = true;
+			boolean search = false;
+
+			while (!search) {
+				for (Entry entry : addressBook) {
+					switch (options) {
+					case 1:
 						if (entry.getFirstName().contains(choice)) {
 							System.out.println("\n************");
 							System.out.println(entry.toString());
 							System.out.println("************");
 							search = true;
-							break;
-						} 
-						else {
-							System.out.println("Contact does not exist!");
-							break;
+							notFound = false;
 						}
-				case 2:
-					if (entry.getLastName().contains(choice)) {
-						System.out.println("\n************");
-						System.out.println(entry.toString());
-						System.out.println("************");
-						search = true;
-						break;
+						continue;
+					case 2:
+						if (entry.getLastName().contains(choice)) {
+							System.out.println("\n************");
+							System.out.println(entry.toString());
+							System.out.println("************");
+							search = true;
+							notFound = false;
+						}
+						continue;
+
+					case 3:
+						if (entry.getPhoneNumber().contains(choice)) {
+							System.out.println("\n************");
+							System.out.println(entry.toString());
+							System.out.println("************");
+							search = true;
+							notFound = false;
+						}
+						continue;
+
+					case 4:
+						if (entry.getEmail().contains(choice)) {
+							System.out.println("\n************");
+							System.out.println(entry.toString());
+							System.out.println("************");
+							search = true;
+							notFound = false;
+						}
+						continue;
+
 					}
-					else {
-						System.out.println("Contact does not exist!");
-						break;
-					}
-				case 3:
-					if (entry.getPhoneNumber().contains(choice)) {
-						System.out.println("\n************");
-						System.out.println(entry.toString());
-						System.out.println("************");
-						search = true;
-						break;
-					}
-					else {
-						System.out.println("Contact does not exist!");
-						break;
-					}
-				case 4:
-					if (entry.getEmail().contains(choice)) {
-						System.out.println("\n************");
-						System.out.println(entry.toString());
-						System.out.println("************");
-						search = true;
-						break;
-					}
-					else {
-						System.out.println("Contact does not exist!");
-						break;
-					}
-				case 5:
+				}
+				if (notFound) {
+					System.out.println("No results found!");
 					search = true;
-					break;
 				}
 
 			}
+		} catch (InputMismatchException e) {
+			System.out.println("Invalid search option.");
+			userInput.nextLine();
 		}
+
 	}
 
-	//example 2 of how we could search for a specific entry:
-	
+	// example 2 of how we could search for a specific entry:
+
 //	public static void searchEntry() {
 //		System.out.println("Please choose what you'd like to search by:");
 //		System.out.println("1. First Name\n" + "2. Last Name\n" + "3. Phone Number\n" + "4. Email\n");
@@ -159,14 +159,14 @@ public class AddressBook {
 //			}
 	// All of the entries will be printed out
 	public static void printAddressBook() {
-		if(addressBook.isEmpty()==true) {
+		if (addressBook.isEmpty() == true) {
 			System.out.println("Address book is empty!");
 		} else {
-		addressBook.forEach(entry -> {
-			System.out.println("\n************");
-			System.out.println(entry);
-			System.out.println("************");
-		});
+			addressBook.forEach(entry -> {
+				System.out.println("\n************");
+				System.out.println(entry);
+				System.out.println("************");
+			});
 		}
 	}
 
